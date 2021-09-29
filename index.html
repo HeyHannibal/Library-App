@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,17 +9,28 @@
     <script src="script.js" defer></script>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
-    <div id='bookForm'>
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" minlength="1" required>
-        <label for="author">Author</label>
-        <input type="text" name="author" id="author"required > 
-        <label for="number">Number Of Pages</label>
-        <input type="number" name="pages" id="pages" required>
-        <input type="checkbox" id="readIt" required>
-        <button id="addBook">i will make a killing, when i learn all this stuff</button>
+   
+        <form id='bookForm'>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" minlength="1" required>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" minlength="1" required>
+            <label for="number">Number Of Pages</label>
+            <input type="number" name="pages" id="pages" min="0" required>
+            <input type="checkbox" id="readIt" >
+            <input type="submit" id="addBook">Add Book</input>
+        </form>
+        
     </div>
     <div id="display"></div>
+    <div id="libraryLog">
+        <p id='totalBooks'></p>
+        <p id='read'></p>
+        <p id='notRead'></p>
+
+    </div>
 </body>
+
 </html>
