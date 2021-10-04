@@ -22,11 +22,8 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(t, a, p, r) {
-    if (t.length === 0 || a.length === 0 || p.length === 0) {
-       console.log('no');
-    }
-    else {
-        const newBook = new Book(t, a, p, r);
+    if (t.length != 0 && a.length != 0 && p.length != 0) {
+       const newBook = new Book(t, a, p, r);
         myLibrary.push(newBook);
     }
 }
@@ -109,13 +106,7 @@ function logBooks() {
     let n = 0;
     myLibrary.forEach((item) => (item.readOrNot === true) ? n=n+1: n=n)
     booksRead.textContent = "Books read: " + n;
-    booksUnread.textContent = "Books read: " + (myLibrary.length - n);
+    booksUnread.textContent = "Books not read: " + (myLibrary.length - n);
 }
 logBooks()
 
-// const LoTR = new Book('Lord of The Rings', 'J.R.R. Tolkien', '1178', true)
-// myLibrary.push(LoTR)
-// const HoD = new Book('Heart of Darkness', 'Joseph Conrad' , '122', false )
-// myLibrary.push(HoD)
-// const KfC = new Book('Killing For Company', 'Brian Masters' , '400', true )
-// myLibrary.push(KfC)
