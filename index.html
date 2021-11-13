@@ -8,30 +8,36 @@
     <title>Library</title>
     <script src="script.js" defer></script>
     <link href="style.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-   
-        <form id='bookForm'>
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" minlength="1" required>
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" minlength="1" required>
-            <label for="number">Number Of Pages</label>
-            <input type="number" name="pages" id="pages" min="0" required>
-            <input type="checkbox" id="readIt" >
-            <input type="button" id="addBook">Add Book</input>
-        </form>
-        
-    </div>
-    <div id="display"></div>
-    <div id="libraryLog">
-        <p id='totalBooks'></p>
-        <p id='read'></p>
-        <p id='notRead'></p>
+    <header class='topBar'>
+        <h1 id='name'>Bookeep</h1>
+    </header>
+    <span class='material-icons md-48 openForm'>add_circle_outline</span>
+    <div class='window'>
+        <div class='libMenu in'>
+            <form id='bookForm'>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" minlength="3" required>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" minlength="5" required>
+                <label for="number">Number Of Pages</label>
+                <input type="number" name="pages" id="pages" min="50" max='20000' required>
+                <input type="checkbox" id="readIt">
+                <input type="button" id="addBook">Add Book</input>
+                <span class="error" aria-live="polite"></span>
+            </form>
+            <div id="libraryLog">
+                <p id='totalBooks'></p>
+                <p id='read'></p>
+                <p id='notRead'></p>
+            </div>
+        </div>
+        <div id="display"></div>
+
 
     </div>
 </body>

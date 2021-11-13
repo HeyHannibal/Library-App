@@ -1,8 +1,99 @@
+
+body{
+
+    font-family: 'Roboto';
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+.window{
+    box-sizing: border-box;
+
+    max-height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.libMenu {
+    background-color:rgba(0, 174, 255, 0.26);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: left 400ms ease-in-out;
+    left: -240px;
+    padding: 1rem;
+    box-shadow: 1px 0px 5px black inset;
+    z-index: 1;
+}
+.out {
+    left: 0
+}
+.in {
+    left: -240px
+}
 #bookForm {
-    width: 200px;
+     margin-top: 2rem; 
     display: flex;
     flex-direction: column;
     row-gap: 10px;
-    align-items: center;
-    background-color: rgb(243, 209, 243);
+    align-items: flex-start;
+}
+.bookCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color:lightblue;
+    max-height: 40%;
+}
+.bookCard > h3,h4,h5 {
+    margin: 0.5rem;
+}
+.material-icons.md-48 { 
+    font-size: 48px; 
+}
+.material-icons.md-48:hover { 
+    cursor: pointer;
+}
+.openForm {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    color:rgba(73, 89, 94, 0.952);
+    z-index: 4;
+}   
+.error {
+    width  : 100%;
+    padding: 0;
+  
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+  }
+  
+  .error.active {
+    padding: 0.3em;
+  }
+
+  #name {
+      box-sizing: border-box;
+      width: 100vw;
+      background-color: coral;
+      margin: 0;
+      padding: 0.5rem;
+      box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.575);
+  }
+
+#display {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y:auto ;
+    width: 100%;
+
 }
