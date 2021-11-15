@@ -1,3 +1,4 @@
+
 const storeJSON = (function () {
     const save = function () {
         localStorage.setItem('library.lib', JSON.stringify(library.lib))
@@ -81,22 +82,25 @@ class Book {
 
 
 
-let formError = document.querySelector('.error')
+let formError = document.querySelectorAll('.error')
 function checkValidity() {
     if (!title.checkValidity()) {
-        formError.classList.add('active')
-        formError.textContent = `Title too short, add at least ${3-title.value.length} characters`
+        formError[0].hidden = false
+        formError[0].textContent = `Title too short, add at least ${3-title.value.length} characters`
         return false
     } else if (!author.checkValidity()) {
-        formError.classList.add('active')
-        formError.textContent = `Author's name must have at least 5 characters. Sorry, books by Bono aren't allowed`
+        formError[1].hidden = false
+        formError[1].textContent = `Author's name must have at least 5 characters. Sorry, books by Bono aren't allowed`
         return false
     } else if (!pages.checkValidity()) {
-        formError.classList.add('active')
-        if (pages.validity.rangeUnderflow) formError.textContent = `A proper book should have more than 50 pages`
+        formError[2].hidden = false
+        formError[2].textContent = `A proper book should have more than 50 pages`
         return false
     }
-    else return true 
+    else {
+        let allErrors = Array.from(formError)
+        allErrors.forEach(item => item.hidden = true)
+        return true} 
 }
 const addBookToDom = document.querySelector('#addBook').addEventListener('click', function () {
     let title = document.querySelector('#title');
@@ -136,7 +140,11 @@ if(menu.classList.contains('out')) {
     menu.classList.replace('out','in')}
 else menu.classList.replace('in','out')
 })
-
+const checkbox = document.querySelector('#readIt')
+checkbox.addEventListener('click', () => {
+    let checkboxIcon = document.querySelector('.checkboxIcon')
+    if(checkbox.checked) checkboxIcon.textContent = 'check_box';
+    else checkboxIcon.textContent = 'check_box_outline_blank';
+   
+})
 document.onload = storeJSON.load()
-
-
