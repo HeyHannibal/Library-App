@@ -1,30 +1,24 @@
 
 body{
-
+    overflow: hidden;
     font-family: 'Roboto';
     margin: 0;
     width: 100vw;
     height: 100vh;
-}
-.window{
-    box-sizing: border-box;
-
-    max-height: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
+    background-color: #f0f0f0 ;
 }
 .libMenu {
-    background-color:rgba(0, 174, 255, 0.26);
+    background-color:#fafafa;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
+    position: absolute;
     transition: left 400ms ease-in-out;
     left: -240px;
     padding: 1rem;
+    height: 100%;
     box-shadow: 1px 0px 5px black inset;
-    z-index: 1;
+    
 }
 .out {
     left: 0
@@ -36,15 +30,25 @@ body{
      margin-top: 2rem; 
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 15px;
     align-items: flex-start;
+    color: rgb(92, 92, 92);
+    font-weight: bold;
+    
 }
 .bookCard {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color:lightblue;
-    max-height: 40%;
+    align-items: center;
+    background: rgb(159,229,255);
+    background: linear-gradient(200deg, rgb(203, 241, 255) 0%,  rgb(228, 248, 255) 34%, rgba(255,255,255,1) 100%);
+    padding: 0.5rem;
+    max-height: 12rem;
+    width: 15rem;
+    margin: 1rem;
+    border-radius: 5px 20px 5px 5px;
+    box-shadow: 2px 2px 4px rgb(49, 72, 87);
 }
 .bookCard > h3,h4,h5 {
     margin: 0.5rem;
@@ -56,44 +60,76 @@ body{
     cursor: pointer;
 }
 .openForm {
-    position: fixed;
+    position: absolute;
     bottom: 1.5rem;
     right: 1.5rem;
-    color:rgba(73, 89, 94, 0.952);
+    color:rgba(77, 161, 187, 0.952);
     z-index: 4;
 }   
 .error {
     width  : 100%;
-    padding: 0;
-  
     font-size: 80%;
     color: white;
-    background-color: #900;
-    border-radius: 0 0 5px 5px;
+    background-color: rgba(241, 171, 90, 0.507);
+    border-radius: 0 5px 5px 5px;
     box-sizing: border-box;
+    padding: 1rem;
   }
-  
-  .error.active {
-    padding: 0.3em;
-  }
-
+ 
   #name {
       box-sizing: border-box;
       width: 100vw;
-      background-color: coral;
+      background-color: #74b5db;
       margin: 0;
       padding: 0.5rem;
       box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.575);
+      color: rgb(255, 255, 255);
   }
 
 #display {
+    padding: 3rem;
+    padding-left: 15%;
+    padding-right: 15%;
     display: flex;
     flex-wrap: wrap;
-    row-gap: 10px;
-    column-gap: 10px;
     max-height: 100%;
     overflow-x: hidden;
     overflow-y:auto ;
-    width: 100%;
+    
+    justify-content: center;
+    margin: 0;
+   
+}
+input {
+    border-radius: 20px;
+    border: 5px transparent inset;
+    background-color: rgb(217, 240, 255);
+}
+@media only screen and (max-width: 1200px) {
+    #display {
+            padding: 3rem;
+            padding-left: 8%;
+            padding-right: 8%;
+    }
 
+    
+  }
+ #readitCheck{
+     display: flex;
+     width: 6rem;
+     justify-content: space-between;
+    align-items: center;
+
+}
+
+#readItLabel{
+    margin-bottom: 0px;
+} 
+ label>[type~="checkbox"] {
+    display: none;
+    user-select: none;
+
+ }
+.material-icons{
+    user-select: none;
 }
