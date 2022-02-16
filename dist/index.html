@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
-    <script src="script.js" defer></script>
+
     <link href="style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Source+Serif+Pro:ital,wght@1,300&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -17,25 +19,22 @@
         <h1 id='name'>Bookeep</h1>
     </header>
     <div class='libMenu in'>
-        <form id='bookForm'>
+        <form id='bookForm' novalidate>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" minlength="3" required>
             <span class="error" id='titleError' aria-live="polite" hidden></span>
-
             <label for="author">Author</label>
             <input type="text" name="author" id="author" minlength="5" required>
             <span class="error" id='authorError' aria-live="polite" hidden></span>
-
             <label for="number">Number Of Pages</label>
-            <input type="number" name="pages" id="pages" min="50" max='20000' required>
+            <input type="number" name="pages" id="pages" min="50" max='99999'required>
             <span class="error" id='pagesError' aria-live="polite" hidden></span>
             <div id='readitCheck'>
-                <label for="read" id='readItLabel'>Read</label>
-                <label id='iconWrap'><input type="checkbox" name='read' id='readIt'><span
-              class="checkboxIcon material-icons">check_box_outline_blank</span></label>
+                <label id='formIconWrap'><input type="checkbox" name='read' id='readIt'>
+                    <span class="checkboxIcon material-icons">check_box_outline_blank</span></label>
+                <p for="read" id='readItLabel'>Read</p>
             </div>
-            <span id="addBook" class='material-icons' hidden>post_add</span>
-
+            <button id="addBook">Add book</button>
             <div id="libraryLog">
                 <p id='totalBooks'></p>
                 <p id='read'></p>
@@ -43,10 +42,12 @@
             </div>
     </div>
     <div class='window'>
+        <div id='pushRigth' hidden></div>
+        <div id="display">
+        </div>
     </div>
-    <div id="display"></div>
     <span class='material-icons md-48 openForm'>add_circle_outline</span>
-
+<script src='main.js'></script>
 </body>
 
 </html>

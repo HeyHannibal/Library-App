@@ -1,6 +1,4 @@
 import './style.css'
-
-
 const storeJSON = (function () {
     const save = function () {
         localStorage.setItem('library.lib', JSON.stringify(library.lib))
@@ -9,7 +7,7 @@ const storeJSON = (function () {
         if (localStorage.getItem('hasRunBefore') === null) {
             localStorage.setItem('hasRunBefore', 'true')
             addBook('Heart Of Darkness','Joseph Conrad','128',false)
-            addBook('Devil In the White City','Erik Larson','447',true)
+            addBook('Devil In the Wddddddddhite City','Erik Larson','447',true)
             addBook('Lord Of The Rings','J.R.R Tolkien', '1178', true)
         }
         else {
@@ -19,7 +17,6 @@ const storeJSON = (function () {
                 library.lib.push(oldBook)
                 oldBook.createDOMBook()
                 library.booKeep()
-                
             })
         }
     }
