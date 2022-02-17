@@ -1,7 +1,6 @@
 import "./style.css";
 
 import signInForm from "./signIn";
-import defaultBook from './components/defaultBook'
 import checkValidity from './components/checkValidity'
 document.querySelector("body").append(signInForm());
 
@@ -10,8 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import firestoreFn from "./firestoreFn.js";
 import { loginEmailPAssword, createAccount, logOut } from "./firebaseAuth.js";
-
-
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyB8YxCWJy-B8Lv7RL2f81ul4pCGlmXlz6k",
@@ -33,12 +30,11 @@ export default async function App() {
   })
 }
 
-
 const auth = getAuth(firebaseApp);
 
 qsel("#signIn").addEventListener("click", (e) => {
-  e.preventDefault(), 
-  loginEmailPAssword(auth);
+  e.preventDefault(),
+    loginEmailPAssword(auth);
 });
 
 qsel("#signUp").addEventListener("click", (e) => {
@@ -61,19 +57,24 @@ const monitorAuthState = async (myAuth) => {
     } else {
       qsel("#userName").textContent = "You're not logged in";
       qsel("#authForm").style.display = "flex";
+      let domBooks = qsel('#display').childNodes
+      while (domBooks) {
+        domBooks[0].remove()
+      }
     }
   });
 };
 
 async function renderOnUserLogin(user) {
   let userBooks = await firestoreFn.getAllUserBooks(user);
+  console.log(userBooks)
   userBooks.forEach((book) => {
-    const { title, author, pages, read } = book;
-    let newBook = new Book(title, author, pages, read);
+    const { title, author, pages, read, fireID } = book;
+    let newBook = new Book(title, author, pages, read, fireID);
     newBook.createDOMBook();
+
     library.lib.push(newBook);
     library.booKeep();
-    console.log(library.lib)
   });
 }
 
@@ -90,7 +91,8 @@ const library = (() => {
     });
   };
   const booKeep = (book) => {
-    lib.push(book)
+    if (book) lib.push(book)
+    setID()
   };
   return {
     lib,
@@ -99,11 +101,12 @@ const library = (() => {
 })();
 
 class Book {
-  constructor(title, author, pages, trueOr) {
+  constructor(title, author, pages, trueOr, fireID) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = trueOr;
+    this.fireID = fireID
   }
   createDOMBook() {
     let bookCard = document.createElement("div");
@@ -123,9 +126,6 @@ class Book {
   }
 }
 
-
-
-
 document.querySelector("#addBook").addEventListener("click", function (e) {
   e.preventDefault()
   let title = document.querySelector("#title");
@@ -139,22 +139,26 @@ document.querySelector("#addBook").addEventListener("click", function (e) {
   }
 });
 
-
 async function addBook(title, author, pages, read) {
-  let newBook = new Book(title, author, pages, read);
+  let newBook = new Book(title, author, pages, read, null);
   let bookObject = Object.assign({}, newBook);
   newBook.createDOMBook();
 
-  let newBookRef = await firestoreFn.addToBookCollection(auth.currentUser.uid,bookObject);
+  let newBookRef = await firestoreFn.addToBookCollection(auth.currentUser.uid, bookObject);
   newBook.firestorePath = newBookRef._key.path.segments;
+  console.log(newBookRef,'hhiih')
+  newBook['fireID'] = newBookRef._key.path.segments[3]
   library.booKeep(newBook);
 }
 
+
 document.querySelector("#display").addEventListener("click", async (e) => {
   if (e.target.classList.contains("delete")) {
-    let deleteThis = library.lib.splice(e.target.parentNode.id, 1);
+    let deleted = library.lib.splice(e.target.parentNode.id, 1);
+    console.log(deleted)
     document.getElementById(`${e.target.parentNode.id}`).remove();
-    /// DELETE FIRESTORE
+    console.log(deleted[0].fireID)
+    firestoreFn.deleteBook(auth.currentUser.uid, deleted[0].fireID)
   }
   if (e.target.type === "checkbox") {
     let update = library.lib[e.target.parentNode.parentNode.id];
@@ -172,7 +176,6 @@ checkbox.addEventListener("click", () => {
     ? (checkboxIcon.textContent = "check_box")
     : (checkboxIcon.textContent = "check_box_outline_blank");
 });
-// document.onload = storeJSON.load();
 
 qsel(".openForm").addEventListener("click", () => {
   let libMenu = qsel(".libMenu");

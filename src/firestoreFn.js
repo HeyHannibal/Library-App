@@ -34,14 +34,14 @@ firestoreFn.addToCollection = async (cllctn, object) => {
     return newDocRef;
 };
 
-firestoreFn.deleteBook = async (cllctn, id) => {
-    await deleteDoc(doc(db, cllctn, id));
+firestoreFn.deleteBook = async (userID, bookID) => {
+    deleteDoc(doc(db, 'users', userID, 'books', bookID ));
 };
 
-firestoreFn.updateBook = async (cllctn, id, value) => {
-    const book = doc(db, cllctn, id);
+firestoreFn.updateBook = async (userID, bookID, key, value) => {
+    const book = doc(db, 'users', userID, 'books', bookID);
     await updateDoc(book, {
-        read: value,
+        key: value,
     });
 };
 
@@ -49,7 +49,9 @@ firestoreFn.getAllUserBooks = async (user) => {
     const querySnapshot = await getDocs(collection(db, 'users', user, 'books'));
     let data = [];
     querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+        let book = doc.data()
+        book.fireID = doc._key.path.segments[8]
+        data.push(book)
     });
     return data;
 }
