@@ -41,7 +41,7 @@ firestoreFn.deleteBook = async (userID, bookID) => {
 firestoreFn.updateBook = async (userID, bookID, key, value) => {
     const book = doc(db, 'users', userID, 'books', bookID);
     await updateDoc(book, {
-        key: value,
+       [key]: value,
     });
 };
 

@@ -1,8 +1,7 @@
 import "./style.css";
+import checkValidity from './components/checkValidityFn'
+import storeJSON from './localStorage'
 
-import signInForm from "./signIn";
-import checkValidity from './components/checkValidity'
-document.querySelector("body").append(signInForm());
 
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -18,7 +17,6 @@ const firebaseApp = initializeApp({
   messagingSenderId: "392976072032",
   appId: "1:392976072032:web:2cb9a745c3da5585cdb205",
 });
-
 export default async function App() {
   return initializeApp({
     apiKey: "AIzaSyB8YxCWJy-B8Lv7RL2f81ul4pCGlmXlz6k",
@@ -42,21 +40,33 @@ qsel("#signUp").addEventListener("click", (e) => {
   createAccount(auth);
 });
 
-qsel("#signOut").addEventListener("click", (e) => {
-  e.preventDefault();
-  logOut(auth);
-});
+
+
+qsel('#noSignIn').addEventListener('click', e => {
+  qsel("#signInCont").style.display = "none";
+})
+
+qsel('.sign header').addEventListener('click', (e) => {
+  logOut(auth)
+})
+
 
 const monitorAuthState = async (myAuth) => {
   onAuthStateChanged(myAuth, (user) => {
     if (user) {
-      qsel("#authForm").style.display = "none";
+      qsel("#signInCont").style.display = "none";
       qsel("#userName").textContent = user.providerData[0].email;
+      qsel('.sign header').classList.add('out')
+      qsel('.sign header').textContent = 'Sign Out'
+
       firestoreFn.setUser("users", user.uid, { name: user.email });
       renderOnUserLogin(user.uid);
+
     } else {
+      qsel('.sign header').classList.add('in')
+      qsel('.sign header').textContent = 'Sign In'
       qsel("#userName").textContent = "You're not logged in";
-      qsel("#authForm").style.display = "flex";
+      qsel("#signInCont").style.display = "flex";
       let domBooks = qsel('#display').childNodes
       while (domBooks) {
         domBooks[0].remove()
@@ -72,13 +82,13 @@ async function renderOnUserLogin(user) {
     const { title, author, pages, read, fireID } = book;
     let newBook = new Book(title, author, pages, read, fireID);
     newBook.createDOMBook();
-
     library.lib.push(newBook);
     library.booKeep();
   });
 }
 
 monitorAuthState(auth)
+
 
 
 const library = (() => {
@@ -163,7 +173,7 @@ document.querySelector("#display").addEventListener("click", async (e) => {
   if (e.target.type === "checkbox") {
     let update = library.lib[e.target.parentNode.parentNode.id];
     update.read = e.target.checked;
-    await firestoreFn.updateBook("books", update.docID, e.target.checked);
+    await firestoreFn.updateBook(auth.currentUser.uid,  update.fireID, 'read', e.target.checked);
   }
   library.booKeep();
   // storeJSON.save();

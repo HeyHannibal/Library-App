@@ -18,9 +18,9 @@
     <header class='topBar'>
         <h1 id='name'>Bookeep</h1>
         <h4 id='userName'></h4>
-        <button id='signOut'>Sign Out</button>
+        <button class="sign header" >Sign Out</button>
     </header>
-    <div class='libMenu in'>
+    <div class='libMenu out'>
         <form id='bookForm' novalidate>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" minlength="3" required>
@@ -29,7 +29,7 @@
             <input type="text" name="author" id="author" minlength="5" required>
             <span class="error" id='authorError' aria-live="polite" hidden></span>
             <label for="number">Number Of Pages</label>
-            <input type="number" name="pages" id="pages" min="50" max='99999'required>
+            <input type="number" name="pages" id="pages" min="50" max='99999' required>
             <span class="error" id='pagesError' aria-live="polite" hidden></span>
             <div id='readitCheck'>
                 <label id='formIconWrap'><input type="checkbox" name='read' id='readIt'>
@@ -42,14 +42,29 @@
                 <p id='read'></p>
                 <p id='notRead'></p>
             </div>
+        </form>
     </div>
+    <div id="signInCont">
+        <form id='authForm'>
+        <label for="emaill">Email
+            <input name="email" type="email" id="signInEmail">
+        </label>
+        <label for="password">password
+            <input name="password" type="password" id="signInPassword">
+        </label>
+        <button id="signIn">Sign In</button>
+        <button id="signUp">Sign Up</button>
+        <a id='noSignIn'>Continue without signin in<br> (Use Local Storage)</a>
+    </form>
+</div>
     <div class='window'>
-        <div id='pushRigth' hidden></div>
+        <div id='pushRigth'></div>
         <div id="display">
         </div>
     </div>
     <span class='material-icons md-48 openForm'>add_circle_outline</span>
-<script src='main.js'></script>
+   
+    <script src='main.js'></script>
 </body>
 
 </html>

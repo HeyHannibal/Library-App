@@ -1,4 +1,4 @@
-let formError = document.querySelectorAll(".error");
+const formError = document.querySelectorAll(".error");
 export default function checkValidity(e) {
   e.preventDefault();
   if (!title.checkValidity()) {
