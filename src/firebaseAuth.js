@@ -6,7 +6,7 @@ import {
     signOut,
 } from "firebase/auth";
 
-import { qsel } from "./index";
+import { qsel } from "./helperFn";
 
 const firebaseApp = App();
 

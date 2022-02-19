@@ -25,4 +25,3 @@ export default function checkValidity(e) {
     return true;
   }
 }
-
